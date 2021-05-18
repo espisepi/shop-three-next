@@ -9,6 +9,7 @@ import Box from '@/components/canvas/Box';
 
 import { A11y } from '@react-three/a11y'
 import useStore from '@/helpers/store'
+import { CineonToneMapping } from 'three';
 
 function ModelScene() {
     const gltf = useGLTF('obj/scene.glb');
@@ -48,10 +49,14 @@ function ModelScene() {
 
         gl.toneMapping = THREE.LinearToneMapping;
 
-        camera.position.z = 1;
+        camera.position.z = 20;
     },[])
 
-    return <primitive object={gltf.scene} />;
+    return (
+    <group>
+      <primitive object={gltf.scene} />
+    </group>
+    );
 }
 
 function PlanePurchase({ purchase }) {
@@ -94,7 +99,7 @@ export default function Scene({purchase}) {
             <PlanePurchase r3f purchase={purchase} />
         </Suspense>
         <OrbitControls enablePan={false} />
-        <BackgroundPrincipalDiv />
+        {/* <BackgroundPrincipalDiv /> */}
         </>
     );
 }
