@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 // import { createCheckoutSession } from "next-stripe/client";
 import usePurchase from '@/hooks/usePurchase';
 
-const Scene = dynamic(() => import('@/pages/Scene'), {
+const Scene = dynamic(() => import('@/scene/Scene'), {
   ssr: false,
 })
 
