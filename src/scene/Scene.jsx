@@ -11,6 +11,8 @@ import { A11y } from '@react-three/a11y'
 import useStore from '@/helpers/store'
 import { CineonToneMapping } from 'three';
 
+import { CartProvider, useCart } from "react-use-cart";
+
 function ModelScene() {
     const gltf = useGLTF('obj/scene.glb');
     // console.log(gltf);
@@ -79,27 +81,76 @@ function PlanePurchase({ purchase }) {
     );
 }
 
-export default function Scene({purchase}) {
+function ModelProducts({products}) {
+
+  const gltf = useGLTF('obj/scene.glb');
+
+  const {
+    isEmpty,
+    cartTotal,
+    totalUniqueItems,
+    items,
+    updateItemQuantity,
+    removeItem,
+    emptyCart,
+    addItem
+  } = useCart();
+
+  console.log(items)
+
+  return (
+
+    <group name="products">
+      { products.map( (p,i) => (
+        <A11y
+          role='button'
+          actionCall={() => {
+            addItem(p)
+          }}
+        >
+        <primitive key={i} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} object={gltf.nodes.Sphere.clone()} userData={{product:p}} />
+        </A11y>
+      )) }
+    </group>
+
+    // <group>
+    //   <primitive scale={[0.5,0.5,0.5]} object={gltf.nodes.Sphere} />
+    //   <primitive scale={[0.5,0.5,0.5]} position={[2,0,0]} object={gltf.nodes.Sphere.clone()} />
+    //   <primitive scale={[0.5,0.5,0.5]} position={[-2,0,0]} object={gltf.nodes.Sphere.clone()} />
+    // </group>
+  );
+}
+
+export default function Scene({purchase, products}) {
 
     const { scene } = useThree();
     useEffect(()=>{
         if(scene){
             scene.background = new THREE.Color('black');
         }
+        console.log(scene)
     },[])
 
     return (
         <>
-        <ambientLight intensity={0.15} />
-        <directionalLight intensity={0.5} position={[0,100,100]} />
-        <directionalLight intensity={0.5} position={[0,100,-100]} />
-        <Stars />
-        <Suspense fallback={<Loading />}>
-            <ModelScene />
-            <PlanePurchase r3f purchase={purchase} />
-        </Suspense>
-        <OrbitControls enablePan={false} />
-        {/* <BackgroundPrincipalDiv /> */}
+        <CartProvider
+          id="jamie"
+          onItemAdd={item => console.log(`Item ${item.id} added!`)}
+          onItemUpdate={item => console.log(`Item ${item.id} updated.!`)}
+          onItemRemove={() => console.log(`Item removed!`)}
+        >
+          <ambientLight intensity={0.15} />
+          <directionalLight intensity={0.5} position={[0,100,100]} />
+          <directionalLight intensity={0.5} position={[0,100,-100]} />
+          <Stars />
+          <Suspense fallback={<Loading />}>
+              <ModelProducts products={products} />
+              {/* <ModelScene /> */}
+              {/* <PlanePurchase r3f purchase={purchase} /> */}
+          </Suspense>
+          <OrbitControls enablePan={false} />
+          {/* <BackgroundPrincipalDiv /> */}
+        </CartProvider>
         </>
     );
 }

@@ -18,7 +18,7 @@ const Scene = dynamic(() => import('@/scene/Scene'), {
 //   ssr: false,
 // });
 
-export default function Page({ title }) {
+export default function Page({ title, prices }) {
 
   useStore.setState({ title })
 
@@ -29,10 +29,17 @@ export default function Page({ title }) {
       setShowPanel(s => !s);
   });
 
+  const products = prices.map( p => ( {
+    id: p.id,
+    price: ((p.unit_amount) / 100).toFixed(2),
+    quantity: 0,
+    img: p.product.images[0],
+  } ) );
+
   return (
     <>
       {/* <h1>HOla mundo</h1> */}
-      <Scene r3f purchase={purchase} />
+      <Scene r3f purchase={purchase} products={products} />
       { showPanel ? <PanelItems /> : <div></div> }
 
       <div style={{zIndex:20, position:'absolute', right:'10px', top:'10px'}}>

@@ -5708,6 +5708,11 @@ react-three-fiber@0.0.0-deprecated:
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-0.0.0-deprecated.tgz#c737242487d824cf9520307308b7e4c4071a278f"
   integrity sha512-EblIqTAsIpkYeM8bZtC4lcpTE0A2zCEGipFB52RgcQq/q+0oryrk7Sxt+sqhIjUu6xMNEVywV8dr74lz5yWO6A==
 
+react-use-cart@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/react-use-cart/-/react-use-cart-1.11.1.tgz#b85a655bdf1fea56d35d6da588d4641bc2ab55ea"
+  integrity sha512-TK8Ff4Bz9VnrNhBhVTPxTdT+aWQctmsOksQChO/3L75S3SL0tJNQ9dyFAKT6g9Awv3uxLh7FeR4YhabnjhfuSQ==
+
 react-use-measure@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.0.4.tgz#cb675b36eaeaf3681b94d5f5e08b2a1e081fedc9"
