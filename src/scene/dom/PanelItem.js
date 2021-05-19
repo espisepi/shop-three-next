@@ -99,7 +99,7 @@ function Page( {products} ) {
     return (
       <>
         <h1>
-          Cart ({totalUniqueItems} - {cartTotal})
+          Cart ({totalUniqueItems} - {cartTotal.toFixed(2)})
         </h1>
   
         {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
@@ -124,7 +124,7 @@ function Page( {products} ) {
                     Classic Utility Jacket
                   </h1>
                   <div className="text-xl font-semibold text-gray-500">
-                  { item.itemTotal } &#8364;
+                  { item.itemTotal.toFixed(2) } &#8364;
                   </div>
                   <div className="w-full flex-none text-sm font-medium text-gray-500 mt-2">
                     In stock
@@ -138,6 +138,7 @@ function Page( {products} ) {
                     <div className="w-3/12 flex items-center justify-center rounded-md bg-black text-white">{item.quantity}</div>
                     <button onPointerDown={() => updateItemQuantity(item.id, item.quantity + 1)} className="w-3/12 flex items-center justify-center rounded-md bg-black text-white" type="submit">+</button>
                   </div>
+                  <button onPointerDown={() => removeItem(item.id)} className="w-3/12 flex items-center justify-center rounded-md bg-black text-white">Remove &times;</button>
                 </div>
 
               </div>
