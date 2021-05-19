@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import { loadStripe } from "@stripe/stripe-js";
 import Stripe from "stripe";
 // import { createCheckoutSession } from "next-stripe/client";
-import usePurchase from '@/hooks/usePurchase';
 
 import PanelItems from '@/scene/dom/PanelItem';
 import Hamburger from 'hamburger-react';
@@ -24,8 +23,6 @@ export default function Page({ title, prices }) {
 
   useStore.setState({ title })
 
-  const { purchase } = usePurchase();
-
   const [showPanel, setShowPanel] = useState(false);
   const changeShowPanel = useCallback(()=> {
       setShowPanel(s => !s);
@@ -41,7 +38,7 @@ export default function Page({ title, prices }) {
   return (
     <>
       {/* <h1>HOla mundo</h1> */}
-      <Scene r3f purchase={purchase} products={products} />
+      <Scene r3f products={products} />
       
       {/* <div id="menu_principal" style={{position:'fixed'}}> */}
         { showPanel ? <PanelItems products={products} /> : <div></div> }

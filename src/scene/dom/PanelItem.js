@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import usePurchase from '@/hooks/usePurchase';
+import purchase from '@/hooks/purchase';
 import { CartProvider, useCart } from "react-use-cart";
 
 import useStoreCart from '../useStoreCart';
@@ -51,7 +51,11 @@ function Page( {products} ) {
             itemsZustand.pop();
         }
         
-    },[itemsZustand])
+    },[itemsZustand]);
+
+
+    console.log(items)
+    // const { purchase } = usePurchase(items);
 
   
     if (isEmpty) return <p>Your cart is empty</p>;
@@ -83,13 +87,14 @@ function Page( {products} ) {
             </li>
           ))}
         </ul>
+        <button onPointerDown={()=>purchase(items)} >Purchase</button>
       </>
     );
   }
 
 export default function PanelItems({products}) {
 
-    const { purchase } = usePurchase();
+ 
 
     const enterHover = useCallback((e)=>{
         const el = e.currentTarget;

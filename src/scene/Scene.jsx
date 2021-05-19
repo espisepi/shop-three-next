@@ -116,7 +116,7 @@ function ModelProducts({products}) {
           }}
         >
         {/* <primitive key={i} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} object={gltf.nodes.Sphere.clone()} userData={{product:p}} /> */}
-        <mesh key={i} name={`meshProduct${i}`} geometry={sphereMeshes[i].geometry} material={sphereMeshes[i].material} material-needsUpdated={true} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} userData={{product:p}} />
+        <mesh key={i} name={`meshProduct${i}`} geometry={sphereMeshes[i].geometry} material={sphereMeshes[i].material} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} userData={{product:p}} />
         </A11y>
       )) }
     </group>
@@ -129,7 +129,7 @@ function ModelProducts({products}) {
   );
 }
 
-export default function Scene({purchase, products}) {
+export default function Scene({ products }) {
 
     const { scene } = useThree();
     useEffect(()=>{
