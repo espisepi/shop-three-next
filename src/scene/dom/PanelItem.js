@@ -4,6 +4,12 @@ import { CartProvider, useCart } from "react-use-cart";
 
 import useStoreCart from '../useStoreCart';
 
+import dynamic from 'next/dynamic'
+
+const ScrollAnimations = dynamic(() => import('./ScrollAnimations'), {
+  ssr: false,
+})
+
 function Page( {products} ) {
     const { addItem, inCart } = useCart();
   
@@ -200,6 +206,7 @@ export default function PanelItems({products}) {
         //   onItemUpdate={item => console.log(`Item ${item.id} updated.!`)}
         //   onItemRemove={() => console.log(`Item removed!`)}
         >
+
         <div style={{position:'fixed', width:'100%', height:'100vh', backgroundColor:'#333333', opacity:'0.5', zIndex:20 }}></div>
         <div style={{ position:'fixed', zIndex: 25, width:'100%'}}>
 
@@ -207,12 +214,16 @@ export default function PanelItems({products}) {
               <div onPointerDown={(e)=>changeViewCart(true)} onMouseEnter={(e)=>enterHover(e)} onMouseLeave={(e)=>leaveHover(e)} style={{cursor:'pointer'}} className="w-6/12 h-12 justify-center bg-gray-400">Cart</div>
               <div onPointerDown={(e)=>changeViewCart(false)} onMouseEnter={(e)=>enterHover(e)} onMouseLeave={(e)=>leaveHover(e)} style={{cursor:'pointer'}} className="w-6/12 h-12 justify-center bg-gray-400">Products</div>
           </div>
-
-            { showCart ? <Cart /> : <Page products={products} /> }
+            <div id="list_items">
+              { showCart ? <Cart /> : <Page products={products} /> }
+            </div>
             {/* <Cart /> */}
             {/* <Page products={products} /> */}
 
         </div>
+
+        <ScrollAnimations />
+
         </CartProvider>
       </>
     )
