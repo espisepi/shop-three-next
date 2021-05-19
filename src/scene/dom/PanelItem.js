@@ -103,6 +103,7 @@ function Page( {products} ) {
         </h1>
   
         {!isEmpty && <button onClick={emptyCart}>Empty cart</button>}
+        <button onPointerDown={()=>purchase(items)} >Purchase</button>
 
         <div className="flex flex-wrap flex-col">
           {items.map( (item,i) => (
@@ -123,7 +124,7 @@ function Page( {products} ) {
                     Classic Utility Jacket
                   </h1>
                   <div className="text-xl font-semibold text-gray-500">
-                    $110.00
+                  { item.itemTotal } &#8364;
                   </div>
                   <div className="w-full flex-none text-sm font-medium text-gray-500 mt-2">
                     In stock
