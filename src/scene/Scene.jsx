@@ -15,6 +15,8 @@ import { CartProvider, useCart } from "react-use-cart";
 
 import useStoreCart from './useStoreCart';
 
+import { Perf } from 'r3f-perf';
+
 function ModelScene() {
     const gltf = useGLTF('obj/scene.glb');
     // console.log(gltf);
@@ -88,27 +90,23 @@ function ModelProducts({products}) {
   const gltf = useGLTF('obj/scene.glb');
 
   const images = useMemo(()=>(products.map(p=> `https://espicors.herokuapp.com/` + p.img)));
-  console.log(images)
   const textures = useLoader(THREE.TextureLoader, images);
 
-  const {items, addItem} = useStoreCart(state => ({items: state.items, addItem:state.addItem}) )
+  const { addItem } = useStoreCart(state => ({items: state.items, addItem:state.addItem}) )
 
-  const groupRef = useRef();
-  const [isFirstTime,setIsFirstTime] = useState(true);
-  useEffect(()=>{
-    if(groupRef.current && isFirstTime){
-      // setIsFirstTime(false);
-      console.log(groupRef)
-      // groupRef.current.traverse( (m,i) => {
-      //   // m.material.map = textures[i];
-      //   // console.log(m)
-      // });
-    }
-  },[groupRef])
+  const sphereMeshes = useMemo(()=>{
+    return textures.map( (t,i) =>{
+      const geometry = gltf.nodes.Sphere.geometry.clone();
+      const material = gltf.nodes.Sphere.material.clone();
+      t.flipY = false;
+      material.map = t;
+      return new THREE.Mesh(geometry, material);
+    });
+  })
   
   return (
 
-    <group ref={groupRef} name="products">
+    <group name="products">
       { products.map( (p,i) => (
         <A11y
           key={i}
@@ -117,7 +115,8 @@ function ModelProducts({products}) {
             addItem(p)
           }}
         >
-        <primitive key={i} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} object={gltf.nodes.Sphere.clone()} userData={{product:p}} />
+        {/* <primitive key={i} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} object={gltf.nodes.Sphere.clone()} userData={{product:p}} /> */}
+        <mesh key={i} name={`meshProduct${i}`} geometry={sphereMeshes[i].geometry} material={sphereMeshes[i].material} material-needsUpdated={true} scale={[0.5,0.5,0.5]} position={[(i-1)*2,0,0]} userData={{product:p}} />
         </A11y>
       )) }
     </group>
@@ -142,6 +141,7 @@ export default function Scene({purchase, products}) {
 
     return (
         <>
+        <Perf />
         <CartProvider
           id="jamie"
           onItemAdd={item => console.log(`Item ${item.id} added!`)}
