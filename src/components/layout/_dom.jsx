@@ -16,7 +16,7 @@ const Dom = ({ dom }) => {
   return (
     <div
       id='principalDiv'
-      className='absolute z-10 top-0 left-0 w-screen h-screen overflow-hidden dom'
+      className='absolute top-0 left-0 w-screen h-screen dom'
       ref={ref}
     >
       <Header />

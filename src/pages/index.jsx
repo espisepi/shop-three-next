@@ -10,6 +10,8 @@ import usePurchase from '@/hooks/usePurchase';
 import PanelItems from '@/scene/dom/PanelItem';
 import Hamburger from 'hamburger-react';
 
+import ScrollDivs from '@/components/canvas/ScrollDivs';
+
 const Scene = dynamic(() => import('@/scene/Scene'), {
   ssr: false,
 })
@@ -40,11 +42,15 @@ export default function Page({ title, prices }) {
     <>
       {/* <h1>HOla mundo</h1> */}
       <Scene r3f purchase={purchase} products={products} />
-      { showPanel ? <PanelItems products={products} /> : <div></div> }
+      
+      {/* <div id="menu_principal" style={{position:'fixed'}}> */}
+        { showPanel ? <PanelItems products={products} /> : <div></div> }
+        <div style={{zIndex:20, position:'fixed', right:'10px', top:'10px'}}>
+            <Hamburger toggled={showPanel} toggle={changeShowPanel} color='#FFFFFF' />
+        </div>
+      {/* </div> */}
 
-      <div style={{zIndex:20, position:'absolute', right:'10px', top:'10px'}}>
-          <Hamburger toggled={showPanel} toggle={changeShowPanel} color='#FFFFFF' />
-      </div>
+      <ScrollDivs />
     </>
   )
 }

@@ -9,8 +9,11 @@ const LCanvas = ({ children }) => {
   return (
     <Canvas
       style={{
-        position: 'absolute',
-        top: 0,
+        position: 'fixed',
+        width:'100%',
+        height:'100vh',
+        zIndex: 15
+        // top: 0,
       }}
       onCreated={(state) => state.events.connect(dom.current)}
     >

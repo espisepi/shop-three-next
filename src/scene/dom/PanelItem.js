@@ -109,8 +109,8 @@ export default function PanelItems({products}) {
         //   onItemUpdate={item => console.log(`Item ${item.id} updated.!`)}
         //   onItemRemove={() => console.log(`Item removed!`)}
         >
-        <div style={{position:'absolute', width:'100%', height:'100vh', backgroundColor:'#333333', opacity:'0.5', zIndex:20 }}></div>
-        <div style={{top:'50px', position:'absolute', display:'flex', flexDirection:'row', flexWrap:'wrap', zIndex: 25}}>
+        <div style={{position:'fixed', width:'100%', height:'100vh', backgroundColor:'#333333', opacity:'0.5', zIndex:20 }}></div>
+        <div style={{top:'50px', position:'fixed', display:'flex', flexDirection:'row', flexWrap:'wrap', zIndex: 25}}>
 
             <Cart />
             <Page products={products} />
