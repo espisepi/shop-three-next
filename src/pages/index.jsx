@@ -42,7 +42,7 @@ export default function Page({ title, prices }) {
       
       {/* <div id="menu_principal" style={{position:'fixed'}}> */}
         { showPanel ? <PanelItems products={products} /> : <div></div> }
-        <div style={{zIndex:20, position:'fixed', right:'10px', top:'10px'}}>
+        <div style={{zIndex:50, position:'fixed', right:'10px', top:'10px'}}>
             <Hamburger toggled={showPanel} toggle={changeShowPanel} color='#FFFFFF' />
         </div>
       {/* </div> */}

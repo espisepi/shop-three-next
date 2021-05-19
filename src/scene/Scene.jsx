@@ -141,7 +141,7 @@ export default function Scene({ products }) {
 
     return (
         <>
-        <Perf />
+        {/* <Perf /> */}
         <CartProvider
           id="jamie"
           onItemAdd={item => console.log(`Item ${item.id} added!`)}
