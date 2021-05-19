@@ -40,7 +40,7 @@ export default function Page({ title, prices }) {
     <>
       {/* <h1>HOla mundo</h1> */}
       <Scene r3f purchase={purchase} products={products} />
-      { showPanel ? <PanelItems /> : <div></div> }
+      { showPanel ? <PanelItems products={products} /> : <div></div> }
 
       <div style={{zIndex:20, position:'absolute', right:'10px', top:'10px'}}>
           <Hamburger toggled={showPanel} toggle={changeShowPanel} color='#FFFFFF' />

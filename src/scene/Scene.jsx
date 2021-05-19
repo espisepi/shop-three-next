@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useThree, useLoader, useFrame } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
@@ -12,6 +12,8 @@ import useStore from '@/helpers/store'
 import { CineonToneMapping } from 'three';
 
 import { CartProvider, useCart } from "react-use-cart";
+
+import useStoreCart from './useStoreCart';
 
 function ModelScene() {
     const gltf = useGLTF('obj/scene.glb');
@@ -85,24 +87,31 @@ function ModelProducts({products}) {
 
   const gltf = useGLTF('obj/scene.glb');
 
-  const {
-    isEmpty,
-    cartTotal,
-    totalUniqueItems,
-    items,
-    updateItemQuantity,
-    removeItem,
-    emptyCart,
-    addItem
-  } = useCart();
+  const images = useMemo(()=>(products.map(p=> `https://espicors.herokuapp.com/` + p.img)));
+  console.log(images)
+  const textures = useLoader(THREE.TextureLoader, images);
 
-  console.log(items)
+  const {items, addItem} = useStoreCart(state => ({items: state.items, addItem:state.addItem}) )
 
+  const groupRef = useRef();
+  const [isFirstTime,setIsFirstTime] = useState(true);
+  useEffect(()=>{
+    if(groupRef.current && isFirstTime){
+      // setIsFirstTime(false);
+      console.log(groupRef)
+      // groupRef.current.traverse( (m,i) => {
+      //   // m.material.map = textures[i];
+      //   // console.log(m)
+      // });
+    }
+  },[groupRef])
+  
   return (
 
-    <group name="products">
+    <group ref={groupRef} name="products">
       { products.map( (p,i) => (
         <A11y
+          key={i}
           role='button'
           actionCall={() => {
             addItem(p)
