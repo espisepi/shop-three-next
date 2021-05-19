@@ -133,7 +133,9 @@ function Page( {products} ) {
 
                 <div className="flex space-x-3 mb-4 text-sm font-medium">
                   <div className="flex-auto flex space-x-3">
-                    <button className="w-1/2 flex items-center justify-center rounded-md bg-black text-white" type="submit">Add To Bag</button>
+                    <button onPointerDown={() => updateItemQuantity(item.id, item.quantity - 1)} className="w-3/12 flex items-center justify-center rounded-md bg-black text-white" type="submit">-</button>
+                    <div className="w-3/12 flex items-center justify-center rounded-md bg-black text-white">{item.quantity}</div>
+                    <button onPointerDown={() => updateItemQuantity(item.id, item.quantity + 1)} className="w-3/12 flex items-center justify-center rounded-md bg-black text-white" type="submit">+</button>
                   </div>
                 </div>
 
