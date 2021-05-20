@@ -12,7 +12,7 @@ const ScrollAnimations = dynamic(() => import('./ScrollAnimations'), {
 
 function Page( {products} ) {
     const { addItem, inCart } = useCart();
-  
+    
     return (
 
 <div className="flex flex-wrap flex-col">
@@ -34,7 +34,7 @@ function Page( {products} ) {
                     Classic Utility Jacket
                   </h1>
                   <div className="text-xl font-semibold text-gray-500">
-                    $110.00
+                  { parseFloat(item.price).toFixed(2) } &#8364;
                   </div>
                   <div className="w-full flex-none text-sm font-medium text-gray-500 mt-2">
                     In stock
