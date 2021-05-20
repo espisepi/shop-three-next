@@ -15,10 +15,6 @@ const Scene = dynamic(() => import('@/scene/Scene'), {
   ssr: false,
 })
 
-// const usePurchase = dynamic(() => import('@/hooks/usePurchase'), {
-//   ssr: false,
-// });
-
 export default function Page({ title, prices }) {
 
   useStore.setState({ title })
@@ -42,6 +38,7 @@ export default function Page({ title, prices }) {
       
       {/* <div id="menu_principal" style={{position:'fixed'}}> */}
         { showPanel ? <PanelItems products={products} /> : <div></div> }
+        {/* <ScrollAnimations /> */}
         <div style={{zIndex:50, position:'fixed', right:'10px', top:'10px'}}>
             <Hamburger toggled={showPanel} toggle={changeShowPanel} color='#FFFFFF' />
         </div>

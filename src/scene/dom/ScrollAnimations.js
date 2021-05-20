@@ -16,13 +16,8 @@ export default function ScrollAnimations(){
 
 function ListItemsAnimation({gsap}) {
 
-    const el = useMemo(()=>document.getElementById('list_items'));
-
-    const[firstTime,setFirsTime] = useState(true);
     useEffect(()=>{
-        if (firstTime) {
-            setFirsTime(false);
-
+            const el = document.getElementById('list_items');
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".section-one",
@@ -32,8 +27,8 @@ function ListItemsAnimation({gsap}) {
                     scrub: 1,
                 }
             });
-            tl.to( el, { y: -1000.0 } );
-        }
+
+            tl.fromTo( el, {y: 0}, { y: -1000.0 } );
     },[]);
 
     return null;
